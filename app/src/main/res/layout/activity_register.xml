@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".RegisterActivity"
+    android:background="@drawable/background">
+
+    <EditText
+        android:id="@+id/emailRegisterTextView"
+        android:layout_width="226dp"
+        android:layout_height="48dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="Email"
+        android:inputType="textEmailAddress"
+        android:padding="15dp"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="197dp" />
+
+    <EditText
+        android:id="@+id/passwordRegisterTextView"
+        android:layout_width="233dp"
+        android:layout_height="52dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        tools:layout_editor_absoluteX="94dp"
+        tools:layout_editor_absoluteY="258dp" />
+
+    <EditText
+        android:id="@+id/confirmPasswordTextView"
+        android:layout_width="231dp"
+        android:layout_height="55dp"
+        android:background="@drawable/input"
+        android:ems="10"
+        android:hint="Confirm password"
+        android:inputType="textPassword"
+        android:padding="15dp"
+        tools:layout_editor_absoluteX="90dp"
+        tools:layout_editor_absoluteY="323dp" />
+
+    <TextView
+        android:id="@+id/registerTextView"
+        android:layout_width="250dp"
+        android:layout_height="71dp"
+        android:fontFamily="sans-serif-thin"
+        android:text="REGISTER"
+        android:textSize="50sp"
+        tools:layout_editor_absoluteX="80dp"
+        tools:layout_editor_absoluteY="113dp" />
+
+    <Button
+        android:id="@+id/registerButton"
+        android:layout_width="265dp"
+        android:layout_height="68dp"
+        android:backgroundTint="@color/white"
+        android:text="REGISTER"
+        android:textColor="@color/grey"
+        android:textSize="32sp"
+        app:cornerRadius="20dp"
+        tools:layout_editor_absoluteX="73dp"
+        tools:layout_editor_absoluteY="406dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>
