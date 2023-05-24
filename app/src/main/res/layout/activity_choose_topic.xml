@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background"
+    tools:context=".ChooseSubjectActivity">
+
+    <ImageView
+        android:id="@+id/questionsImageView"
+        android:layout_width="225dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="85dp"
+        android:layout_marginTop="10dp"
+        app:srcCompat="@drawable/daco_4141480"
+        tools:layout_editor_absoluteX="92dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/quizardTextView"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/questionsImageView"
+        android:layout_marginStart="95dp"
+        android:layout_marginTop="12dp"
+        android:text="QUIZARD"
+        android:textColor="#AB47BC"
+        android:textSize="54sp"
+        tools:layout_editor_absoluteX="125dp"
+        tools:layout_editor_absoluteY="237dp" />
+
+    <TextView
+        android:id="@+id/chooseSubjectTextView"
+        android:layout_width="327dp"
+        android:layout_height="56dp"
+        android:layout_below="@id/quizardTextView"
+        android:layout_marginStart="35dp"
+        android:layout_marginTop="33dp"
+        android:color="@color/purple_500"
+        android:gravity="center_horizontal"
+        android:text="Time for some questions! Choose your subject:"
+        android:textColor="#5C6BC0"
+        android:textSize="20sp"
+        tools:layout_editor_absoluteX="35dp"
+        tools:layout_editor_absoluteY="308dp" />
+
+    <LinearLayout
+        android:id="@+id/questionsWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/chooseSubjectTextView"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="93dp"
+        android:layout_marginEnd="20dp"
+        android:orientation="horizontal"
+        android:weightSum="4">
+
+        <ImageView
+            android:id="@+id/moviesImageView"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="5dp"
+            android:layout_weight="1"
+            android:background="@drawable/movie" />
+
+        <ImageView
+            android:id="@+id/personImageView"
+            android:layout_width="160dp"
+            android:layout_height="150dp"
+            android:layout_marginLeft="40dp"
+            android:layout_weight="1"
+            android:background="@drawable/flower" />
+
+
+    </LinearLayout>
+
+</RelativeLayout>

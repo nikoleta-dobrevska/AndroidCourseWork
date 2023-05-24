@@ -86,4 +86,18 @@
         app:layout_constraintTop_toBottomOf="@+id/loginButton"
         tools:cornerRadius="15dp" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="239dp"
+        android:layout_height="56dp"
+        android:layout_marginTop="150dp"
+        android:gravity="center_horizontal"
+        android:text="Don't have an account? Click here to sign up"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/signUpButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/loginButton" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
