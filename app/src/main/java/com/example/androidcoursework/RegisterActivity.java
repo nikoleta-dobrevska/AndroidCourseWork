@@ -54,10 +54,6 @@ public class RegisterActivity extends AppCompatActivity {
         Button registerButton = binding.registerButton;
         TextView alreadyLoggedIn = binding.alreadyLoggedTextView;
 
-        String email = String.valueOf(emailTextView.getText());
-        String password = String.valueOf(passwordTextView.getText());
-        String confirmPassword = String.valueOf(confirmPasswordTextView.getText());
-
         alreadyLoggedIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -69,19 +65,23 @@ public class RegisterActivity extends AppCompatActivity {
         });
 
         registerButton.setOnClickListener(new View.OnClickListener() {
+            String email = emailTextView.getText().toString();
+            String password = passwordTextView.getText().toString();
+            String confirmPassword = confirmPasswordTextView.getText().toString();
+
             @Override
             public void onClick(View view) {
-                if(TextUtils.isEmpty(email)){
+                if(email.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please enter valid email address!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if(TextUtils.isEmpty(password)){
+                if(password.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please enter valid password!", Toast.LENGTH_LONG).show();
                     return;
                 }
 
-                if(TextUtils.isEmpty(confirmPassword)){
+                if(confirmPassword.isEmpty()){
                     Toast.makeText(getApplicationContext(), "Please confirm password!", Toast.LENGTH_LONG).show();
                     return;
                 }
@@ -126,7 +126,8 @@ public class RegisterActivity extends AppCompatActivity {
         Matcher hasDigit = digit.matcher(password);
         Matcher hasSpecial = special.matcher(password);
 
-        if(hasLowercaseLetter.find() && hasUppercaseLetter.find() && lengthCheck.find() && hasDigit.find() && hasSpecial.find()) {
+        if(hasLowercaseLetter.find() && hasUppercaseLetter.find() &&
+                lengthCheck.find() && hasDigit.find() && hasSpecial.find()) {
             return true;
         }
 
