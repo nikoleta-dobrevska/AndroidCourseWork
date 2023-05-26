@@ -47,19 +47,19 @@
 
     <LinearLayout
         android:id="@+id/questionsWrapper"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="391dp"
+        android:layout_height="184dp"
         android:layout_below="@id/chooseSubjectTextView"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="93dp"
+        android:layout_marginTop="100dp"
         android:layout_marginEnd="20dp"
         android:orientation="horizontal"
-        android:weightSum="4">
+        android:weightSum="2">
 
         <ImageView
             android:id="@+id/moviesImageView"
-            android:layout_width="160dp"
-            android:layout_height="150dp"
+            android:layout_width="162dp"
+            android:layout_height="match_parent"
             android:layout_marginLeft="5dp"
             android:layout_weight="1"
             android:background="@drawable/movie" />
@@ -67,12 +67,21 @@
         <ImageView
             android:id="@+id/personImageView"
             android:layout_width="160dp"
-            android:layout_height="150dp"
-            android:layout_marginLeft="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="0dp"
             android:layout_weight="1"
-            android:background="@drawable/flower" />
+            android:background="@drawable/_610230" />
 
 
     </LinearLayout>
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="150dp"
+        android:layout_marginTop="680dp"
+        android:backgroundTint="#EF5350"
+        android:text="LOGOUT" />
 
 </RelativeLayout>

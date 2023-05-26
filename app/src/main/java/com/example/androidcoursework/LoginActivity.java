@@ -24,18 +24,6 @@ public class LoginActivity extends AppCompatActivity {
     FirebaseAuth mAuth;
 
     @Override
-    public void onStart() {
-        super.onStart();
-        FirebaseUser currentUser = mAuth.getCurrentUser();
-        if(currentUser != null){
-            Intent intent = new Intent(LoginActivity.this, ChooseSubjectActivity.class);
-            startActivity(intent);
-
-            finish();
-        }
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityLoginBinding.inflate(getLayoutInflater());
@@ -48,45 +36,34 @@ public class LoginActivity extends AppCompatActivity {
         TextView emailTextView = binding.emailLoginText;
         TextView passwordTextView = binding.passwordLoginText;
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String email = String.valueOf(emailTextView.getText());
-                String password = String.valueOf(passwordTextView.getText());
+        loginButton.setOnClickListener(view -> {
+            String email = String.valueOf(emailTextView.getText());
+            String password = String.valueOf(passwordTextView.getText());
 
-                if(TextUtils.isEmpty(email)){
-                    Toast.makeText(getApplicationContext(), "Please enter valid email address!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if(TextUtils.isEmpty(password)){
-                    Toast.makeText(getApplicationContext(), "Please enter valid password!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                mAuth.signInWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    Intent intent = new Intent(LoginActivity.this, ChooseSubjectActivity.class);
-                                    startActivity(intent);
-
-                                    finish();
-                                } else {
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-                            }
-                        });
+            if(TextUtils.isEmpty(email)){
+                Toast.makeText(getApplicationContext(), "Please enter valid email address!", Toast.LENGTH_LONG).show();
+                return;
             }
+
+            if(TextUtils.isEmpty(password)){
+                Toast.makeText(getApplicationContext(), "Please enter valid password!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(task -> {
+                        if (task.isSuccessful()) {
+                            Intent intent = new Intent(LoginActivity.this, ChooseSubjectActivity.class);
+                            startActivity(intent);
+
+                            finish();
+                        } else {
+                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+                    });
         });
 
-        signUpButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(LoginActivity.this, RegisterActivity.class));
-            }
-        });
+        signUpButton.setOnClickListener(view -> startActivity(new Intent(LoginActivity.this, RegisterActivity.class)));
     }
 }

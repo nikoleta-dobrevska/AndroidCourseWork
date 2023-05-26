@@ -26,7 +26,7 @@ import java.util.regex.Pattern;
 
 public class RegisterActivity extends AppCompatActivity {
     private ActivityRegisterBinding binding;
-    FirebaseAuth mAuth;
+    private FirebaseAuth mAuth;
 
     @Override
     public void onStart() {
@@ -48,66 +48,64 @@ public class RegisterActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        TextView emailTextView = binding.emailRegisterTextView;
-        TextView passwordTextView = binding.passwordRegisterTextView;
-        TextView confirmPasswordTextView = binding.confirmPasswordTextView;
         Button registerButton = binding.registerButton;
         TextView alreadyLoggedIn = binding.alreadyLoggedTextView;
 
-        alreadyLoggedIn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
-                startActivity(intent);
+        alreadyLoggedIn.setOnClickListener(view -> {
+            Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+            startActivity(intent);
 
-                finish();
-            }
+            finish();
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            String email = emailTextView.getText().toString();
-            String password = passwordTextView.getText().toString();
-            String confirmPassword = confirmPasswordTextView.getText().toString();
+        registerButton.setOnClickListener(view -> {
+            String email = binding.emailRegisterTextView.getText().toString();
+            String password = binding.passwordRegisterTextView.getText().toString();
+            String confirmPassword = binding.confirmPasswordTextView.getText().toString();
 
-            @Override
-            public void onClick(View view) {
-                if(email.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter valid email address!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if(password.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please enter valid password!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if(confirmPassword.isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Please confirm password!", Toast.LENGTH_LONG).show();
-                    return;
-                }
-
-                if(password.compareTo(confirmPassword) == 0) {
-                    if(validatePassword(password)) {
-                        mAuth.createUserWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            Toast.makeText(RegisterActivity.this, "You have registered successfully!",
-                                                    Toast.LENGTH_SHORT).show();
-                                        } else {
-                                            Toast.makeText(RegisterActivity.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
-                                        }
-                                    }
-                                });
-                    } else {
-                        Toast.makeText(getApplicationContext(), "Password must contain at least 8 characters, a capital letter, a lowercase letter and a special character!", Toast.LENGTH_LONG).show();
-                    }
-                } else {
-                    Toast.makeText(getApplicationContext(), "Passwords didn't match!", Toast.LENGTH_SHORT).show();
-                }
+            if(email.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Please enter valid email address!", Toast.LENGTH_LONG).show();
+                return;
             }
+
+            if(password.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Please enter valid password!", Toast.LENGTH_LONG).show();
+                return;
+            }
+
+            if(!validatePassword(password)) {
+                Toast.makeText(getApplicationContext(), "Password must contain at least 8 characters, a capital letter, a lowercase letter and a special character!", Toast.LENGTH_LONG).show();
+
+                return;
+            }
+
+            if(confirmPassword.isEmpty()){
+                Toast.makeText(getApplicationContext(), "Please confirm password!", Toast.LENGTH_LONG).show();
+
+                return;
+            }
+
+            if(password.compareTo(confirmPassword) != 0) {
+                Toast.makeText(getApplicationContext(), "Passwords didn't match!", Toast.LENGTH_SHORT).show();
+
+                return;
+            }
+
+            mAuth.createUserWithEmailAndPassword(email, password)
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful()) {
+                        Toast.makeText(RegisterActivity.this, "You have registered successfully!",
+                            Toast.LENGTH_SHORT).show();
+
+                        Intent intent = new Intent(RegisterActivity.this, LoginActivity.class);
+                        startActivity(intent);
+
+                        finish();
+                    } else {
+                        Toast.makeText(RegisterActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                    }
+            });
         });
     }
 
@@ -118,7 +116,6 @@ public class RegisterActivity extends AppCompatActivity {
         Pattern digit = Pattern.compile("[0-9]");
         Pattern special = Pattern.compile ("[!@#$%&*()_+=|<>?{}\\[\\]~-]");
         Pattern length = Pattern.compile (".{8}");
-
 
         Matcher hasLowercaseLetter = lowercaseLetter.matcher(password);
         Matcher hasUppercaseLetter = uppercaseLetter.matcher(password);

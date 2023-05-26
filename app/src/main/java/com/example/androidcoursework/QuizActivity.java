@@ -2,6 +2,7 @@ package com.example.androidcoursework;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -24,9 +25,10 @@ public class QuizActivity extends AppCompatActivity {
     private List<Questions> questionsList;
     private int currentNumOfQuestion;
     TextView numOfQuestion, question;
-    Button option1, option2, option3, option4, nextButton;
+    Button option1, option2, option3, option4, nextButton, backButton;
 
     private String selectedAnswer = "";
+    @SuppressLint("DefaultLocale")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,84 +46,77 @@ public class QuizActivity extends AppCompatActivity {
         option3 = binding.optThreeButton;
         option4 = binding.optFourButton;
         nextButton = binding.nextButton;
+        backButton = binding.backButton;
 
         questionsList = AllQuestionsAndAnswers.getQuestions(getChosenSubject);
 
-        numOfQuestion.setText((currentNumOfQuestion+1) + "/" + questionsList.size());
+        numOfQuestion.setText(String.format("%d/%d", currentNumOfQuestion + 1, questionsList.size()));
         question.setText(questionsList.get(0).getQuestion());
         option1.setText(questionsList.get(0).getOption1());
         option2.setText(questionsList.get(0).getOption2());
         option3.setText(questionsList.get(0).getOption3());
         option4.setText(questionsList.get(0).getOption4());
 
-        option1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedAnswer.isEmpty()){
-                    selectedAnswer = option1.getText().toString();
+        backButton.setOnClickListener(view -> {
+            Intent intent1 = new Intent(QuizActivity.this, ChooseSubjectActivity.class);
+            startActivity(intent1);
 
-                    option1.setBackgroundColor(Color.parseColor("#C36424"));
+            finish();
+        });
 
-                    showCorrectAnswer();
+        option1.setOnClickListener(view -> {
+            if(selectedAnswer.isEmpty()){
+                selectedAnswer = option1.getText().toString();
 
-                    questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
-                }
+                option1.setBackgroundColor(Color.parseColor("#C36424"));
+
+                showCorrectAnswer();
+
+                questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
             }
         });
 
-        option2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedAnswer.isEmpty()){
-                    selectedAnswer = option2.getText().toString();
+        option2.setOnClickListener(view -> {
+            if(selectedAnswer.isEmpty()){
+                selectedAnswer = option2.getText().toString();
 
-                    option2.setBackgroundColor(Color.parseColor("#C36424"));
+                option2.setBackgroundColor(Color.parseColor("#C36424"));
 
-                    showCorrectAnswer();
+                showCorrectAnswer();
 
-                    questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
-                }
+                questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
             }
         });
 
-        option3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedAnswer.isEmpty()){
-                    selectedAnswer = option3.getText().toString();
+        option3.setOnClickListener(view -> {
+            if(selectedAnswer.isEmpty()){
+                selectedAnswer = option3.getText().toString();
 
-                    option3.setBackgroundColor(Color.parseColor("#C36424"));
+                option3.setBackgroundColor(Color.parseColor("#C36424"));
 
-                    showCorrectAnswer();
+                showCorrectAnswer();
 
-                    questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
-                }
+                questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
             }
         });
 
-        option4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedAnswer.isEmpty()){
-                    selectedAnswer = option4.getText().toString();
+        option4.setOnClickListener(view -> {
+            if(selectedAnswer.isEmpty()){
+                selectedAnswer = option4.getText().toString();
 
-                    option4.setBackgroundColor(Color.parseColor("#C36424"));
+                option4.setBackgroundColor(Color.parseColor("#C36424"));
 
-                    showCorrectAnswer();
+                showCorrectAnswer();
 
-                    questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
-                }
+                questionsList.get(currentNumOfQuestion).setSelectedAnswer(selectedAnswer);
             }
         });
 
-        nextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(selectedAnswer.isEmpty()){
-                    Toast.makeText(QuizActivity.this, "You can't move to the next question until you choose an answer!", Toast.LENGTH_SHORT).show();
-                } else {
-                    goToNextQuestion();
-                }
+        nextButton.setOnClickListener(view -> {
+            if(selectedAnswer.isEmpty()){
+                Toast.makeText(QuizActivity.this, "You can't move to the next question until you choose an answer!", Toast.LENGTH_SHORT).show();
+            } else {
+                goToNextQuestion();
             }
         });
     }
@@ -170,7 +165,7 @@ public class QuizActivity extends AppCompatActivity {
             option3.setBackgroundColor(Color.parseColor("#AB47BC"));
             option4.setBackgroundColor(Color.parseColor("#AB47BC"));
 
-            numOfQuestion.setText((currentNumOfQuestion+1) + "/" + questionsList.size());
+            numOfQuestion.setText(new StringBuilder().append(currentNumOfQuestion + 1).append("/").append(questionsList.size()).toString());
             question.setText(questionsList.get(currentNumOfQuestion).getQuestion());
             option1.setText(questionsList.get(currentNumOfQuestion).getOption1());
             option2.setText(questionsList.get(currentNumOfQuestion).getOption2());

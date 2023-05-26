@@ -24,14 +24,11 @@ public class QuizResults extends AppCompatActivity {
         TextView numCorrectAnswers = binding.numCorrectAnswers;
 
          int getFinalResult = getIntent().getIntExtra("correctAnswers", 0);
-         numCorrectAnswers.setText(String.valueOf(getFinalResult)+"/5");
+         numCorrectAnswers.setText(new StringBuilder().append(String.valueOf(getFinalResult)).append("/5").toString());
 
-        startAgain.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(QuizResults.this, ChooseSubjectActivity.class));
-                finish();
-            }
+        startAgain.setOnClickListener(view -> {
+            startActivity(new Intent(QuizResults.this, ChooseSubjectActivity.class));
+            finish();
         });
 
     }

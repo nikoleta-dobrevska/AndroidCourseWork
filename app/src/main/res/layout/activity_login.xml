@@ -92,7 +92,7 @@
         android:layout_height="56dp"
         android:layout_marginTop="150dp"
         android:gravity="center_horizontal"
-        android:text="Don't have an account? Click here to sign up"
+        android:text="Don't have an account? Sign up now"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/signUpButton"
         app:layout_constraintEnd_toEndOf="parent"
